@@ -66,7 +66,7 @@ background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(114,164,148,1) 100%);
 .custom-img-1 {
     text-align: center; 
 } 
-/* Heading Styles */
+
 div.h1 {
     font-size: 36px;
     font-weight: bold;
@@ -91,7 +91,7 @@ h3 {
     margin-bottom: 10px;
 }
 
-/* Paragraph Styles */
+
 p {
     font-size: 16px;
     color: #666;
@@ -99,11 +99,27 @@ p {
     margin-bottom: 20px;
 }
 
-  </style>
+
+    .welcome-message {
+        font-size: 24px;
+        
+        color: white;
+    }
+</style>
+
+  
+
+    
+    
+
+    
+
+
+
 </head>
 <body>
 
-  <!-- Back to top button -->
+  
   <div class="back-to-top"></div>
 
   <header>
@@ -125,9 +141,9 @@ p {
               <a href="#"><span class="mai-logo-instagram"></span></a>
             </div>
           </div>
-        </div> <!-- .row -->
-      </div> <!-- .container -->
-    </div> <!-- .topbar -->
+        </div> 
+      </div> 
+    </div> 
 
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
       <div class="container">
@@ -159,23 +175,26 @@ p {
 </li>
 
 
+
                 @if (Route::has('login'))
 
                 @auth
-
+            
                 <li class="nav-item">
     <a class="nav-link" style="background-color:blue; color:white;" href="{{url('myappointment')}}">My Appointment</a>
                   </li>
+                
 
                 <x-app-layout>
                     <x-slot name="header">
-
+      
                     </x-slot>
-
-
+             
+          
                 </x-app-layout>
-
+               
                 @else
+       
 
 
 
@@ -192,8 +211,8 @@ p {
               @endif
 
           </ul>
-        </div> <!-- .navbar-collapse -->
-      </div> <!-- .container -->
+        </div> 
+      </div> 
     </nav>
   </header>
 
@@ -208,18 +227,18 @@ p {
   </div>
 
   @endif
-
+  
   <div class="page-hero">
     <div class="hero-section">
         <div class="container">
             <div class="row align-items-center">
-                
-                <div class="col-md-6 wow zoomIn">
-                    <span class="subhead">Live Happier</span>
+                <div class="col-md-6 text-center">
+                    <span class="subhead">@auth
+                        <span class="welcome-message">Welcome, {{ auth()->user()->name }}</span>
+                    @endauth <br>Live Happier</span>
                     <h1 class="display-4">Live Healthier</h1>
-                    <a href="{{route('login')}}" class="btn btn-primary">Let's Consult</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary">Let's Consult</a>
                 </div>
-                
                 <div class="col-md-5 wow fadeInRight" data-wow-delay="300ms">
                     <img src="../assets/img/doc.png" alt="Image" class="img-fluid">
                 </div>
@@ -230,7 +249,8 @@ p {
 
 
 
-   <!-- .page-section -->
+
+   
 
    <div class="page-section pb-0">
     <div class="container">
