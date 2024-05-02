@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Doccontroller;
 use App\Http\Controllers\Homecontroller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +40,23 @@ Route::get('/myappointment',[HomeController::class,'myappointment']);
 
 Route::get('/cancel_appoint/{id}',[HomeController::class,'cancel_appoint']);
 
-Route::get('/showappointment',[AdminController::class,'showappointment']);
+Route::get('/showappointment',[AdminController::class,'showappointmentt']);
+
+//doctor//
+Route::get('/doctor/showappointment', [Doccontroller::class,'showappointment'])->name('doctor.showappointment');
+Route::get('/admin/showappointment', [AdminController::class,'showappointment'])->name('admin.showappointment');
+Route::get('/home', [Homecontroller::class, 'redirect'])->name('admin.home');
+Route::get('/home', [Homecontroller::class, 'redirect'])->name('doctor.home');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/showappointment', [Doccontroller::class, 'showappointment'])->name('showappointment');
+    Route::get('/approved/{id}', [Doccontroller::class, 'approved'])->name('approved');
+    Route::get('/canceled/{id}', [Doccontroller::class, 'canceled'])->name('canceled');
+    // Route::get('/showdoctor', [Doccontroller::class, 'showdoctor'])->name('showdoctor');
+});
+
+
 
 Route::get('/approved/{id}',[AdminController::class,'approved']);
 
@@ -64,6 +81,11 @@ Route::get('/',[HomeController::class,'index']);
 Route::get('/about', function () {
     return view('user.about');
 })->name('about');
+
+
+Route::get('/admin/home', function () {
+    return view('admin.home');
+})->name('admin.home');
 
 
 

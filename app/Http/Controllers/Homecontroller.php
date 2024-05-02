@@ -37,31 +37,33 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-        public function redirect(){
-
-            if(Auth::id())
-            {
-                if(Auth::user()->usertype=='0')
-                {
-                    $doctor = doctor::all();
-
-                    return view('user.home',compact('doctor'));
-
-                }
-                    else
-                    {
-                        return view('admin.home');
-                    }
-
-
-            }   else
-            {
-
-                return redirect()->back();
+    public function redirect()
+    {
+        if (Auth::check()) {  
+            switch (Auth::user()->usertype) {
+                case '0':
+                    
+                    $doctor = Doctor::all();  
+                    return view('user.home', compact('doctor'));
+    
+                case '3':
+                    
+                    return view('doctor.home'); 
+    
+                case '1':
+                    
+                    return view('admin.home'); 
+    
+                default:
+                    
+                    return redirect('login'); 
             }
-
-
+        } else {
+            
+            return redirect('login');
         }
+    }
+    
 
         public function index()
         {

@@ -55,35 +55,15 @@ class AdminController extends Controller
 
     }
 
-    public function showappointment()
-    {
-
-        $data = Appointment::all();
-
-
-        /////////////
-        if(Auth::id())
-        {
-
-            if(Auth::user()->usertype==1){
-
-                return view('admin.showappointment',compact('data'));
-
-            }else{
-
-                return redirect()->back();
-            }
-        }
-        else{
-
-            return redirect('login');
-        }
-
-        //////////////
-
-
-
-    }
+    // public function showappointmentt()
+    // {
+    //     if (Auth::check() && Auth::user()->usertype == 3) {
+    //         $data = Appointment::all();
+    //         return view('admin.showappointment', compact('data'));
+    //     } else {
+    //         return redirect('login');
+    //     }
+    // }
 
     public function approved($id)
     {
