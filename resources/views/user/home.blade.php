@@ -167,12 +167,7 @@ p {
     <a class="nav-link text-white" href="{{ route('about') }}">About Us</a>
 </li>
 
-<li class="nav-item">
-    <a class="nav-link text-white" href="http://localhost/hos/hospital/public/html/blog.html">News</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link text-white" href="http://localhost/hos/hospital/public/html/contact.html">Contact</a>
-</li>
+
 
 
 
@@ -264,7 +259,7 @@ p {
             <div class="col-lg-6 py-3 wow fadeInUp">
                 <h1 class="text-success">Welcome to Your Health Center</h1>
                 <p class=" mb-4">our dedicated team of healthcare professionals is committed to providing exceptional and compassionate care tailored to your needs. Whether you're visiting for a routine check-up, specialized treatment, or urgent care, we prioritize your health and comfort. Explore our services and facilities, and feel free to reach out with any questions or to schedule an appointment. Thank you for choosing [Clinic Name]; we look forward to serving you and your family with the highest standard of care</p>
-                <a href="about.html" class="btn btn-primary">Learn More</a>
+                <a href="{{route('about')}}" class="btn btn-primary">Learn More</a>
             </div>
         </div>
     </div>

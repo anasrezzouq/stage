@@ -45,8 +45,7 @@ Route::get('/showappointment',[AdminController::class,'showappointmentt']);
 //doctor//
 Route::get('/doctor/showappointment', [Doccontroller::class,'showappointment'])->name('doctor.showappointment');
 Route::get('/admin/showappointment', [AdminController::class,'showappointment'])->name('admin.showappointment');
-Route::get('/home', [Homecontroller::class, 'redirect'])->name('admin.home');
-Route::get('/home', [Homecontroller::class, 'redirect'])->name('doctor.home');
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -89,3 +88,15 @@ Route::get('/admin/home', function () {
 
 
 
+
+
+
+Route::middleware(['auth', 'verified', 'ensure.email.verified'])->group(function () {
+    Route::get('/admin.home', function () {
+        return view('admin.home');
+    })->name('admin.home');
+
+    Route::get('/doctor.home', function () {
+        return view('doctor.home');
+    })->name('doctor.home');
+});
