@@ -157,7 +157,7 @@ class AdminController extends Controller
     {
         $data = Appointment::find($id);
 
-        return view('admin.email_view',compact('data'));
+        return view('doctor.email_view',compact('data'));
 
     }
 
