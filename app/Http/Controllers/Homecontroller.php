@@ -81,6 +81,16 @@ class HomeController extends Controller
 
         public function appointment(Request $request)
         {
+
+            $request->validate([
+                    'name' => 'required',
+                    'email' => 'required', 
+                    'date' => 'required',
+                    'phone' => 'required',
+                    'message' => 'required',
+                    'doctor' => 'required',
+                    
+                 ]);
             $data = new Appointment;
             $data->name=$request->name;
             $data->email=$request->email;
