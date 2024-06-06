@@ -86,7 +86,6 @@ class HomeController extends Controller
                     'name' => 'required',
                     'email' => 'required', 
                     'date' => 'required',
-                    'phone' => 'required',
                     'message' => 'required',
                     'doctor' => 'required',
                     

@@ -11,4 +11,13 @@ class Appointment extends Model
     use HasFactory;
 
     use Notifiable;
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
 }
