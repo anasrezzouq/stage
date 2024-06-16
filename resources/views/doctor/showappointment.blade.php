@@ -33,15 +33,21 @@
                         <td>{{$appoint->doctor}}</td>
                         <td>{{$appoint->date}}</td>
                         <td>{{$appoint->message}}</td>
-                        <td id="status-{{$appoint->id}}">{{$appoint->status}}</td>
+                        <td>{{$appoint->status}}</td>
                         <td>
                             @if ($appoint->status != 'Approved' && $appoint->status != 'Canceled')
-                                <button id="approve-{{$appoint->id}}" class="btn btn-success" onclick="updateStatus({{$appoint->id}}, 'approved')">Approved</button>
+                                <form action="{{ url('approved', $appoint->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Approved</button>
+                                </form>
                             @endif
                         </td>
                         <td>
                             @if ($appoint->status != 'Approved' && $appoint->status != 'Canceled')
-                                <button id="cancel-{{$appoint->id}}" class="btn btn-danger" onclick="updateStatus({{$appoint->id}}, 'canceled')">Canceled</button>
+                                <form action="{{ url('canceled', $appoint->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Canceled</button>
+                                </form>
                             @endif
                         </td>
                         <td>
@@ -53,34 +59,6 @@
             </div>
         </div>
     </div>
-
     @include('doctor.script')
-    <script>
-        function updateStatus(id, action) {
-            console.log(`Sending request to /${action}/${id}`); // Log the URL being requested
-            fetch(`/${action}/${id}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => response.json())
-              .then(data => {
-                    console.log(`Received response: ${data.status}`); // Log the response status
-                    if (data.status === 'success') {
-                        console.log('Hiding buttons'); // Log before hiding the buttons
-                        document.getElementById(`approve-${id}`).style.display = 'none';
-                        document.getElementById(`cancel-${id}`).style.display = 'none';
-                        // Update the status cell
-                        const statusCell = document.querySelector(`#status-${id}`);
-                        if (statusCell) {
-                            statusCell.innerText = data.appointment.status;
-                        }
-                    } else {
-                        console.error('Error with request:', data); // Log any errors
-                    }
-                }).catch(error => console.error('Error:', error)); // Log any network errors
-        }
-    </script>
 </body>
 </html>

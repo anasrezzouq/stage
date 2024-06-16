@@ -22,32 +22,28 @@ class Doccontroller extends Controller
     }
 
     public function approved($id)
-    {
-        if (Auth::check() && Auth::user()->usertype == 3) {
-            $appointment = Appointment::find($id);
-            if ($appointment) {
-                $appointment->status = 'Approved';
-                $appointment->save();
-                Log::info('Appointment approved', ['appointment' => $appointment]);
-                return response()->json(['status' => 'success', 'appointment' => $appointment]);
-            }
+{
+    if (Auth::check() && Auth::user()->usertype == 3) {
+        $appointment = Appointment::find($id);
+        if ($appointment) {
+            $appointment->status = 'Approved';
+            $appointment->save();
         }
-        return response()->json(['status' => 'error'], 403);
     }
+    return redirect()->back();
+}
 
-    public function canceled($id)
-    {
-        if (Auth::check() && Auth::user()->usertype == 3) {
-            $appointment = Appointment::find($id);
-            if ($appointment) {
-                $appointment->status = 'Canceled';
-                $appointment->save();
-                Log::info('Appointment canceled', ['appointment' => $appointment]);
-                return response()->json(['status' => 'success', 'appointment' => $appointment]);
-            }
+public function canceled($id)
+{
+    if (Auth::check() && Auth::user()->usertype == 3) {
+        $appointment = Appointment::find($id);
+        if ($appointment) {
+            $appointment->status = 'Canceled';
+            $appointment->save();
         }
-        return response()->json(['status' => 'error'], 403);
     }
+    return redirect()->back();
+}
 
 
 
