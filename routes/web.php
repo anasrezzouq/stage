@@ -50,8 +50,8 @@ Route::get('/admin/showappointment', [AdminController::class,'showappointment'])
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/showappointment', [Doccontroller::class, 'showappointment'])->name('showappointment');
-    Route::get('/approved/{id}', [Doccontroller::class, 'approved'])->name('approved');
-    Route::get('/canceled/{id}', [Doccontroller::class, 'canceled'])->name('canceled');
+    Route::post('/approved/{id}', [Doccontroller::class, 'approved'])->name('approved');
+    Route::post('/canceled/{id}', [Doccontroller::class, 'canceled'])->name('canceled');
     // Route::get('/showdoctor', [Doccontroller::class, 'showdoctor'])->name('showdoctor');
 });
 

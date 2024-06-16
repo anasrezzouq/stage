@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
@@ -27,9 +28,11 @@ class Doccontroller extends Controller
             if ($appointment) {
                 $appointment->status = 'Approved';
                 $appointment->save();
+                Log::info('Appointment approved', ['appointment' => $appointment]);
+                return response()->json(['status' => 'success', 'appointment' => $appointment]);
             }
         }
-        return redirect()->back();
+        return response()->json(['status' => 'error'], 403);
     }
 
     public function canceled($id)
@@ -39,24 +42,27 @@ class Doccontroller extends Controller
             if ($appointment) {
                 $appointment->status = 'Canceled';
                 $appointment->save();
+                Log::info('Appointment canceled', ['appointment' => $appointment]);
+                return response()->json(['status' => 'success', 'appointment' => $appointment]);
             }
         }
-        return redirect()->back();
+        return response()->json(['status' => 'error'], 403);
     }
 
-    
+
+
 
     // public function showdoctor()
     // {
     //     Log::info('Checking user authentication status');
-    
+
     //     if (!Auth::check()) {
     //         Log::info('User is not authenticated');
     //         return redirect('login');
     //     }
-    
+
     //     Log::info('User authenticated, checking user type');
-    
+
     //     if (Auth::user()->usertype == 3) {
     //         $doctors = Doctor::all();
     //         Log::info('User is a doctor');
@@ -71,14 +77,11 @@ class Doccontroller extends Controller
     //         }
     //     }
     // }
-    
-public function emailview($id)
+
+    public function emailview($id)
     {
         $data = Appointment::find($id);
 
-        return view('doctor.email_view',compact('data'));
-
+        return view('doctor.email_view', compact('data'));
     }
-
-    
 }
