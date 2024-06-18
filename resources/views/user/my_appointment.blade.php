@@ -196,10 +196,12 @@ p {
                     <td>{{$appoints->date}}</td>
                     <td>{{$appoints->message}}</td>
                     <td>{{$appoints->status}}</td>
+                    @if ($appoints->status != 'Approved' && $appoints->status != 'Canceled')
                     <td>
                         <a class="btn btn-danger" onclick="return confirm('Are you sure to delete this?')" href="{{url('cancel_appoint',$appoints->id)}}">Cancel</a>
                     </td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>
